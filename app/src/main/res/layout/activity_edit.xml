@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cloud.dbchain.sample.ui.edit.EditViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.edit.EditActivity">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/page_margin_top"
+            android:text="@string/title"
+            android:textColor="#444444"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{v->viewModel.finishPage()}"
+            android:text="@string/cancel"
+            android:textColor="#9E9E9E"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/shape_et"
+            android:lineSpacingMultiplier="1.2"
+            android:maxLength="50"
+            android:minHeight="52dp"
+            android:padding="18dp"
+            android:text="@={viewModel.title}"
+            app:layout_constraintEnd_toEndOf="@+id/tvCancel"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:maxLength="2000"
+            android:text="@string/content"
+            android:textColor="#444444"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/etTitle" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etContent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_et"
+            android:gravity="top"
+            android:lineSpacingMultiplier="1.5"
+            android:padding="20dp"
+            android:text="@={viewModel.content}"
+            app:layout_constraintBottom_toTopOf="@+id/ivTitle"
+            app:layout_constraintEnd_toEndOf="@+id/tvCancel"
+            app:layout_constraintStart_toStartOf="@+id/tvContent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivTitle"
+            android:layout_width="138dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="40dp"
+            android:src="@drawable/ic_app_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundFrameLayout
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="30dp"
+            android:elevation="@dimen/btn_elevation"
+            android:onClick="@{v->viewModel.publish()}"
+            android:translationY="-18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etContent"
+            app:qmui_backgroundColor="#2E44FF"
+            app:qmui_radius="20dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_ok" />
+
+        </com.qmuiteam.qmui.widget.roundwidget.QMUIRoundFrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

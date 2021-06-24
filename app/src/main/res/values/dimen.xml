@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="page_margin_top">6dp</dimen>
+    <dimen name="btn_elevation">10dp</dimen>
+    <dimen name="item_elevation">2dp</dimen>
+</resources>

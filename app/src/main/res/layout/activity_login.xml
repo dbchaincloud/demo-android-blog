@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="cloud.dbchain.sample.data.table.User" />
+
+        <variable
+            name="viewModel"
+            type="cloud.dbchain.sample.ui.mnemonic.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.mnemonic.login.LoginActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivTitle"
+            android:layout_width="224dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="68dp"
+            android:src="@drawable/ic_app_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <cloud.dbchain.sample.views.QMUIRoundConstraintLayout
+            android:id="@+id/clUser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="38dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivTitle"
+            app:qmui_backgroundColor="@android:color/white"
+            app:qmui_radius="15dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivLogout"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:onClick="@{v->viewModel.exit()}"
+                android:padding="9dp"
+                android:src="@drawable/ic_logout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
+                android:id="@+id/ivAvatar"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:layout_marginTop="40dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:qmui_is_circle="true"
+                binding:cid="@{viewModel.avatarCid}"
+                binding:placeholder="@{User.DEFAULT_AVATAR}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:text="@{viewModel.nikeName}"
+                android:textColor="#444444"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivAvatar" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/btnEnter"
+                android:layout_width="200dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="30dp"
+                android:elevation="@dimen/btn_elevation"
+                android:gravity="center"
+                android:onClick="@{v->viewModel.startMain()}"
+                android:text="@string/enter"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvName"
+                app:qmui_backgroundColor="#2E44FF"
+                app:qmui_radius="20dp" />
+
+        </cloud.dbchain.sample.views.QMUIRoundConstraintLayout>
+
+        <cloud.dbchain.sample.views.QMUIRoundConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="54dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clUser"
+            app:qmui_backgroundColor="#EFEFEF"
+            app:qmui_radius="15dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMnemonicTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/mnemonic_current"
+                android:textColor="#444444"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="28dp"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@{viewModel.mnemonic}"
+                android:textColor="#9E9E9E"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMnemonicTitle" />
+
+        </cloud.dbchain.sample.views.QMUIRoundConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

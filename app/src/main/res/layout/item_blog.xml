@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="cloud.dbchain.sample.data.table.User" />
+
+        <variable
+            name="blogBound"
+            type="cloud.dbchain.sample.bean.BlogBundle" />
+
+        <variable
+            name="itemClickListener"
+            type="dingshaoshuai.base.mvvm.BaseDatabindingAdapter.ItemClickListener" />
+    </data>
+
+    <cloud.dbchain.sample.views.QMUIRoundConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/item_elevation"
+        android:onClick="@{v->itemClickListener.onItemClick(blogBound)}"
+        app:qmui_backgroundColor="@android:color/white"
+        app:qmui_radius="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:text="@{blogBound.blog.title}"
+            android:textColor="#444444"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvCommentCount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/tvCommentCount"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="22dp"
+            android:gravity="center"
+            android:minWidth="24dp"
+            android:text="2"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle"
+            app:qmui_backgroundColor="#FF2E2E"
+            app:qmui_radius="8dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="27dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@{blogBound.blog.body}"
+            android:textColor="#9E9E9E"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
+            android:id="@+id/ivAvatar"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="20dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvDetail"
+            app:qmui_is_circle="true"
+            binding:cid="@{blogBound.author.photo}"
+            binding:placeholder="@{User.DEFAULT_AVATAR}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{blogBound.author.name}"
+            android:textColor="#444444"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivAvatar"
+            app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+            app:layout_constraintTop_toTopOf="@+id/ivAvatar" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvReading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(blogBound.commentCount)}"
+            android:textColor="#9E9E9E"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivAvatar"
+            app:layout_constraintEnd_toEndOf="@+id/tvCommentCount"
+            app:layout_constraintTop_toTopOf="@+id/ivAvatar" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_reading"
+            app:layout_constraintBottom_toBottomOf="@+id/tvReading"
+            app:layout_constraintEnd_toStartOf="@+id/tvReading"
+            app:layout_constraintTop_toTopOf="@+id/tvReading" />
+
+    </cloud.dbchain.sample.views.QMUIRoundConstraintLayout>
+</layout>

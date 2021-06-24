@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="cloud.dbchain.sample.ui.blogdetail.BlogDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".ui.blogdetail.BlogDetailActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="@dimen/page_margin_top"
+            android:onClick="@{v->viewModel.finishPage()}"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blog_detail"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivBack" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivBack"
+            bind:onRefreshListener="@{() -> viewModel.onRefresh()}"
+            bind:refreshing="@{viewModel.refreshing}">
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appbarLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent">
+
+                    <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:id="@+id/toolbarLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="200dp"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvSupports"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="16dp"
+                                android:text="SUPPORTS"
+                                android:textColor="@android:color/black"
+                                android:textSize="26sp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvTitle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="@{viewModel.blog.title}"
+                                android:textColor="@android:color/black"
+                                android:textSize="24sp"
+                                app:layout_constraintEnd_toEndOf="@+id/tvSupports"
+                                app:layout_constraintStart_toStartOf="@+id/tvSupports"
+                                app:layout_constraintTop_toBottomOf="@+id/tvSupports" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvContent"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:lineSpacingMultiplier="1.5"
+                                android:text="@{viewModel.blog.body}"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintEnd_toEndOf="@+id/tvSupports"
+                                app:layout_constraintStart_toStartOf="@+id/tvSupports"
+                                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="@{viewModel.emptyComment ? View.GONE : View.VISIBLE}"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCommentTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:text="@string/popular_comment"
+                        android:textColor="#444444"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:visibility="@{viewModel.emptyComment ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvContent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/popular_comment_2"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="@{viewModel.emptyComment ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="@+id/tvCommentTitle"
+                        app:layout_constraintStart_toStartOf="@+id/tvCommentTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCommentTitle" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:overScrollMode="never" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <cloud.dbchain.sample.views.QMUIRoundConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:minHeight="52dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:qmui_backgroundColor="#EFEFEF"
+            app:qmui_radius="14dp">
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/btnComment"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:minWidth="80dp"
+                android:onClick="@{v->viewModel.commentClick()}"
+                android:text="@string/comment"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:qmui_backgroundColor="#2E44FF"
+                app:qmui_radius="8dp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etComment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@{viewModel.commentHint}"
+                android:maxLength="30"
+                android:paddingStart="15dp"
+                android:paddingTop="18dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="18dp"
+                android:text="@={viewModel.commentText}"
+                android:textColor="@android:color/black"
+                android:textColorHint="#9E9E9E"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnComment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </cloud.dbchain.sample.views.QMUIRoundConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

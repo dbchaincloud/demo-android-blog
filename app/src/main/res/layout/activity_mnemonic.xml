@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cloud.dbchain.sample.ui.mnemonic.MnemonicViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.mnemonic.MnemonicActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivTitle"
+            android:layout_width="224dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="68dp"
+            android:src="@drawable/ic_app_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <cloud.dbchain.sample.views.QMUIRoundConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivTitle"
+            app:qmui_backgroundColor="@android:color/white"
+            app:qmui_radius="15dp">
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundLinearLayout
+                android:id="@+id/clMnemonic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:qmui_backgroundColor="#F8F8F8"
+                app:qmui_radius="10dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/input_mnemonic"
+                    android:textColor="#444444"
+                    android:textSize="20sp" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etMnemonic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:lineSpacingMultiplier="1.2"
+                    android:minHeight="160dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp"
+                    android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="52dp"
+                    android:text="@={viewModel.mnemonic}"
+                    android:textColor="#3B3B3B"
+                    android:textSize="18sp" />
+
+            </com.qmuiteam.qmui.widget.roundwidget.QMUIRoundLinearLayout>
+
+            <cloud.dbchain.sample.views.QMUIRoundConstraintLayout
+                android:id="@+id/clName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="62dp"
+                app:layout_constraintEnd_toEndOf="@+id/clMnemonic"
+                app:layout_constraintStart_toStartOf="@+id/clMnemonic"
+                app:layout_constraintTop_toBottomOf="@+id/clMnemonic"
+                app:qmui_backgroundColor="#F8F8F8"
+                app:qmui_radius="10dp">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/nickname"
+                    android:maxLength="20"
+                    android:minHeight="62dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="@={viewModel.nikeName}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </cloud.dbchain.sample.views.QMUIRoundConstraintLayout>
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/btnEnter"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="24dp"
+                android:elevation="@dimen/btn_elevation"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.enterClick()}"
+                android:text="@string/enter"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/clMnemonic"
+                app:layout_constraintStart_toStartOf="@+id/clMnemonic"
+                app:layout_constraintTop_toBottomOf="@+id/clName"
+                app:qmui_backgroundColor="#2E44FF"
+                app:qmui_radius="20dp" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/btnGenerate"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="38dp"
+                android:gravity="center"
+                android:onClick="@{() -> viewModel.generateMnemonic()}"
+                android:text="@string/generate_mnemonic"
+                android:textColor="#2E44FF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/clMnemonic"
+                app:layout_constraintStart_toStartOf="@+id/clMnemonic"
+                app:layout_constraintTop_toBottomOf="@+id/btnEnter"
+                app:qmui_borderColor="#2E44FF"
+                app:qmui_borderWidth="1dp"
+                app:qmui_radius="20dp" />
+
+        </cloud.dbchain.sample.views.QMUIRoundConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="cloud.dbchain.sample.data.table.User" />
+
+        <variable
+            name="viewModel"
+            type="cloud.dbchain.sample.ui.main.MainViewModel" />
+
+        <variable
+            name="listener"
+            type="cloud.dbchain.sample.ui.main.MainActivity.ClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivTitle"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/page_margin_top"
+            android:src="@drawable/ic_app_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
+            android:id="@+id/ivAvatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{v->listener.avatarClick()}"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_avatar"
+            app:layout_constraintBottom_toBottomOf="@+id/ivTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivTitle"
+            app:qmui_is_circle="true"
+            binding:cid="@{viewModel.avatarCid}"
+            binding:placeholder="@{User.DEFAULT_AVATAR}" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:background="@null"
+            android:overScrollMode="never"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivTitle"
+            app:tabIndicator="@null"
+            app:tabMode="scrollable"
+            app:tabRippleColor="@android:color/transparent" />
+
+        <cloud.dbchain.sample.views.QMUIRoundConstraintLayout
+            android:id="@+id/clSearch"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/ivAvatar"
+            app:layout_constraintStart_toStartOf="@+id/ivTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+            app:qmui_backgroundColor="#EFEFEF"
+            app:qmui_radius="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </cloud.dbchain.sample.views.QMUIRoundConstraintLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clSearch" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:layout_width="200dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="40dp"
+            android:elevation="@dimen/btn_elevation"
+            android:gravity="center"
+            android:onClick="@{v->listener.writeClick()}"
+            android:text="@string/write_blog"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:qmui_backgroundColor="#2E44FF"
+            app:qmui_radius="18dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

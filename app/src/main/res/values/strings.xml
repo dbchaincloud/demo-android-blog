@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">DBChain博客</string>
+    <string name="common_success">操作成功</string>
+    <string name="common_failure">操作失败</string>
+    <string name="input_mnemonic">输入助记词</string>
+    <string name="name">名称</string>
+    <string name="enter">立即进入</string>
+    <string name="generate_mnemonic">生成助记词</string>
+    <string name="write_blog">写博客</string>
+    <string name="popular">POPULAR</string>
+    <string name="news">最新</string>
+    <string name="comment_most">评价最多</string>
+    <string name="title">标题</string>
+    <string name="content">正文</string>
+    <string name="cancel">取消</string>
+    <string name="blog_detail">帖子详情</string>
+    <string name="popular_comment">热门评论</string>
+    <string name="popular_comment_2">Top Comments</string>
+    <string name="comment">评论</string>
+    <string name="hint_comment">留下你的观点吧！</string>
+    <string name="reply">回复</string>
+    <string name="nickname">昵称</string>
+    <string name="sex">性别</string>
+    <string name="age">年龄</string>
+    <string name="motto">座右铭</string>
+    <string name="save">保存</string>
+    <string name="mnemonic_current">当前助记词</string>
+    <string name="input_nikename">请填写昵称</string>
+    <string name="memonic_invalid">请输入有效的助记词</string>
+    <string name="network_error">网络错误，请重试</string>
+    <string name="input_title">请输入标题</string>
+    <string name="input_content">请输入正文内容</string>
+    <string name="publish_success">发布成功</string>
+    <string name="no_modification">没有做任何修改</string>
+    <string name="input_comment">请输入评论内容</string>
+
+    <string-array name="table_list">
+        <item>@string/popular</item>
+        <item>@string/news</item>
+        <item>@string/comment_most</item>
+    </string-array>
+</resources>

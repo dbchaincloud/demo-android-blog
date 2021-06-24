@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="cloud.dbchain.sample.data.table.User" />
+
+        <variable
+            name="discussBundle"
+            type="cloud.dbchain.sample.bean.DiscussBundle" />
+
+        <variable
+            name="childListener"
+            type="dingshaoshuai.base.mvvm.BaseDatabindingAdapter.ItemChildClickListener" />
+
+    </data>
+
+    <cloud.dbchain.sample.views.QMUIRoundConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{v->childListener.onItemChildClick(v,discussBundle)}"
+        app:qmui_backgroundColor="@android:color/white"
+        app:qmui_radius="14dp">
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
+
+            android:id="@+id/ivAvatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:qmui_is_circle="true"
+            binding:cid="@{discussBundle.author.photo}"
+            binding:placeholder="@{User.DEFAULT_AVATAR}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+            app:layout_constraintTop_toTopOf="@+id/ivAvatar"
+            binding:author="@{discussBundle.author.name}"
+            binding:reply="@{discussBundle.replied}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{discussBundle.discussBean.text}"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvName"
+            app:layout_constraintStart_toStartOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+    </cloud.dbchain.sample.views.QMUIRoundConstraintLayout>
+</layout>
