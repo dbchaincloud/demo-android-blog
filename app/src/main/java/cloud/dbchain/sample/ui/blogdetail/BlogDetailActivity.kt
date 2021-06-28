@@ -9,16 +9,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cloud.dbchain.sample.R
 import cloud.dbchain.sample.bean.BlogBundle
-import cloud.dbchain.sample.databinding.ActivityBlogDetailBinding
+import cloud.dbchain.sample.databinding.ActivityBlogDetail2Binding
 import cloud.dbchain.sample.util.KeyboardUtil
 import cloud.dbchain.sample.views.LinearSpacesItemDecoration
 import com.google.android.material.appbar.AppBarLayout
 import com.qmuiteam.qmui.kotlin.dip
 import dingshaoshuai.base.mvvm.BaseMvvmActivity
 
-class BlogDetailActivity : BaseMvvmActivity<ActivityBlogDetailBinding, BlogDetailViewModel>() {
+class BlogDetailActivity : BaseMvvmActivity<ActivityBlogDetail2Binding, BlogDetailViewModel>() {
     override val layoutId: Int
-        get() = R.layout.activity_blog_detail
+        get() = R.layout.activity_blog_detail2
 
     override val isFitsSystemWindows: Boolean
         get() = false
@@ -27,9 +27,6 @@ class BlogDetailActivity : BaseMvvmActivity<ActivityBlogDetailBinding, BlogDetai
 
     override fun initContentView() {
         super.initContentView()
-        // 去掉上划到顶部的阴影效果
-        binding.appbarLayout.outlineProvider = null
-        binding.toolbarLayout.outlineProvider = ViewOutlineProvider.BOUNDS
         binding.swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#2E44FF"))
         binding.rvComment.let {
             it.layoutManager = LinearLayoutManager(this)
@@ -44,10 +41,6 @@ class BlogDetailActivity : BaseMvvmActivity<ActivityBlogDetailBinding, BlogDetai
             )
             it.adapter = this.adapter
         }
-        // 滑动到顶部启用下拉刷新
-        binding.appbarLayout.addOnOffsetChangedListener(AppBarLayout.BaseOnOffsetChangedListener<AppBarLayout> { appBarLayout, verticalOffset ->
-            binding.swipeRefreshLayout.isEnabled = verticalOffset >= 0
-        })
     }
 
     override fun initData() {
