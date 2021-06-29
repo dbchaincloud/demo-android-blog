@@ -12,7 +12,7 @@ import cloud.dbchain.sample.bean.DiscussBundle
 import cloud.dbchain.sample.data.DiscussRepository
 import cloud.dbchain.sample.data.table.BlogBean
 import cloud.dbchain.sample.data.table.Discuss
-import cloud.dbchain.sample.ktx.toast
+import dingshaoshuai.function.toast
 import cloud.dbchain.sample.ktx.toastFailure
 import dingshaoshuai.base.mvvm.BaseDatabindingAdapter
 import dingshaoshuai.base.mvvm.BaseViewModel

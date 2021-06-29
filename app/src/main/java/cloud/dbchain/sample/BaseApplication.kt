@@ -7,6 +7,7 @@ import cloud.dbchain.sample.ui.ErrorCallback
 import cloud.dbchain.sample.ui.LoadingCallback
 import com.gcigb.dbchain.DBChain
 import dingshaoshuai.baseext.PageStatus
+import dingshaoshuai.function.Function
 
 /**
  * @author: Xiao Bo
@@ -29,6 +30,7 @@ class BaseApplication : Application() {
             ErrorCallback(),
             LoadingCallback::class.java
         )
+        Function.init(this)
     }
 
     companion object {

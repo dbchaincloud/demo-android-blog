@@ -1,7 +1,7 @@
 package cloud.dbchain.sample.cache
 
 import com.gcigb.dbchain.DbChainKey
-import com.gcigb.dbchain.util.json2Any
+import dingshaoshuai.base.feature.json.JsonParseProxy
 
 /**
  * @author: Xiao Bo
@@ -12,6 +12,6 @@ object DBChainKeyCache : BaseObjectCache<DbChainKey>() {
         get() = "key_dbchainkey"
 
     override fun json2T(valueJson: String): DbChainKey {
-        return valueJson.json2Any(DbChainKey::class.java)
+        return JsonParseProxy.instance.toObject(valueJson, DbChainKey::class.java)
     }
 }

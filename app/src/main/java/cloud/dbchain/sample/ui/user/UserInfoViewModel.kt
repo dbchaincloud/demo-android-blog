@@ -11,7 +11,7 @@ import cloud.dbchain.sample.cache.UserInfoCache
 import cloud.dbchain.sample.data.UploadRepository
 import cloud.dbchain.sample.data.UserRepository
 import cloud.dbchain.sample.data.table.User
-import cloud.dbchain.sample.ktx.toast
+import dingshaoshuai.function.toast
 import cloud.dbchain.sample.ktx.toastFailure
 import com.gcigb.dbchain.DBChain
 import kotlinx.coroutines.Dispatchers

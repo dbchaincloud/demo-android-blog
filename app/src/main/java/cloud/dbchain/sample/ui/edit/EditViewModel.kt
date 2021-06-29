@@ -7,7 +7,7 @@ import cloud.dbchain.sample.R
 import cloud.dbchain.sample.bean.BlogBundle
 import cloud.dbchain.sample.data.BlogRepository
 import cloud.dbchain.sample.data.table.Blog
-import cloud.dbchain.sample.ktx.toast
+import dingshaoshuai.function.toast
 import dingshaoshuai.base.mvvm.BaseViewModel
 import dingshaoshuai.base.mvvm.ObservableString
 import kotlinx.coroutines.Dispatchers

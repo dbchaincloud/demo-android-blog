@@ -4,8 +4,8 @@ import android.text.TextUtils
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import cloud.dbchain.sample.util.SPUtil
 import com.gcigb.dbchain.ktx.toJsonSort
+import dingshaoshuai.base.feature.cache.CacheProxy
 
 /**
  * @author: Xiao Bo
@@ -17,7 +17,7 @@ abstract class BaseObjectCache<T> : BaseCache<T>() {
     private val liveData by lazy { MutableLiveData<T>() }
 
     override fun setValue(value: T) {
-        SPUtil.setValue(key, value!!.toJsonSort())
+        CacheProxy.instance.save(key, value!!.toJsonSort())
         _value = value
         liveData.value = _value
     }
@@ -26,7 +26,7 @@ abstract class BaseObjectCache<T> : BaseCache<T>() {
         if (_value != null) {
             return _value
         }
-        val valueJson = SPUtil.getValue(key, "")
+        val valueJson = CacheProxy.instance.get(key, "")
         _value = if (TextUtils.isEmpty(valueJson)) {
             null
         } else {
@@ -36,7 +36,7 @@ abstract class BaseObjectCache<T> : BaseCache<T>() {
     }
 
     override fun clear() {
-        SPUtil.deleteKey(key)
+        CacheProxy.instance.delete(key)
         _value = null
     }
 

@@ -1,7 +1,9 @@
 package cloud.dbchain.sample.cache
 
 import cloud.dbchain.sample.data.table.User
+import com.gcigb.dbchain.DbChainKey
 import com.gcigb.dbchain.util.json2Any
+import dingshaoshuai.base.feature.json.JsonParseProxy
 
 /**
  * @author: Xiao Bo
@@ -12,6 +14,6 @@ object UserInfoCache : BaseObjectCache<User>() {
         get() = "key_userinfo"
 
     override fun json2T(valueJson: String): User {
-        return valueJson.json2Any(User::class.java)
+        return JsonParseProxy.instance.toObject(valueJson, User::class.java)
     }
 }
