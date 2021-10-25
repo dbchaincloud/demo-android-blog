@@ -13,7 +13,7 @@ import cloud.dbchain.sample.data.UserRepository
 import cloud.dbchain.sample.data.table.User
 import dingshaoshuai.function.toast
 import cloud.dbchain.sample.ktx.toastFailure
-import com.gcigb.dbchain.DBChain
+import com.gcigb.dbchain.dbChainKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -75,7 +75,7 @@ class UserInfoViewModel : BaseViewModel() {
             val age = age.get()
             val motto = motto.get()
             // 查询用户在表中的 id
-            val address = DBChain.dbChainKey.address
+            val address = dbChainKey.address
             val oldUser = UserRepository.query(dbchain_key = address, findLast = true)?.lastOrNull()
             if (oldUser == null) {
                 loadingDialog(false)

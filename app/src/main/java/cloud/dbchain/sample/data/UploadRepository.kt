@@ -1,13 +1,14 @@
 package cloud.dbchain.sample.data
 
 import cloud.dbchain.sample.api.FileApi
-import com.gcigb.dbchain.DBChain
+import com.gcigb.dbchain.appCode
 import com.gcigb.dbchain.createAccessToken
-import com.gcigb.network.RetrofitClient
+import com.gcigb.network.createService
 import com.gcigb.network.okHttpClientUpload
+import com.gcigb.network.sendRequestForReturn
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
@@ -20,13 +21,13 @@ object UploadRepository {
 
     suspend fun upload(file: File): String? {
         return withContext(Dispatchers.IO) {
-            return@withContext RetrofitClient.sendRequestForReturn {
-                val body = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+            return@withContext sendRequestForReturn {
+                val body = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
                 val part = MultipartBody.Part.createFormData("file", file.name, body)
-                return@sendRequestForReturn RetrofitClient.createService(
+                return@sendRequestForReturn createService(
                     cls = FileApi::class.java,
                     client = okHttpClientUpload
-                ).upload(createAccessToken(), DBChain.appCode, part).await().result
+                ).upload(createAccessToken(), appCode, part).await().result
             }
         }
     }

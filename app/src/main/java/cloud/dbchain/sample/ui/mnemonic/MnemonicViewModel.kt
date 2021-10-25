@@ -2,6 +2,7 @@ package cloud.dbchain.sample.ui.mnemonic
 
 import android.text.TextUtils
 import androidx.lifecycle.viewModelScope
+import cloud.dbchain.sample.BaseApplication
 import cloud.dbchain.sample.R
 import dingshaoshuai.base.mvvm.BaseViewModel
 import dingshaoshuai.base.mvvm.CallLiveData
@@ -11,12 +12,17 @@ import cloud.dbchain.sample.cache.UserInfoCache
 import cloud.dbchain.sample.data.TokenRepository
 import cloud.dbchain.sample.data.UserRepository
 import cloud.dbchain.sample.data.table.User
+import com.gcigb.dbchain.mnemonic2list
+import com.gcigb.dbchain.util.Wallet.importMnemonic
+import com.gcigb.dbchain.withDBChainKey
 import dingshaoshuai.function.toast
-import com.gcigb.dbchain.DBChain
-import com.gcigb.dbchain.MnemonicClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.nio.charset.StandardCharsets
+import java.util.ArrayList
 
 /**
  * @author: Xiao Bo
@@ -38,14 +44,15 @@ class MnemonicViewModel : BaseViewModel() {
     fun enterClick() {
         // 检查助记词是否合法
         val word = mnemonic.get()
-        val checkMnemonic = MnemonicClient.checkMnemonic(word)
+        val mnemonicList = mnemonic2list(word)
+        val checkMnemonic = checkMnemonic(mnemonicList)
         if (!checkMnemonic) {
             toast(R.string.memonic_invalid)
             return
         }
-        val dbChainKey = MnemonicClient.importMnemonic(MnemonicClient.mnemonic2list(word))
+        val dbChainKey = importMnemonic(mnemonicList)
         // 设置 DBChainKey
-        DBChain.withDBChainKey(dbChainKey)
+        withDBChainKey(dbChainKey)
         viewModelScope.launch(Dispatchers.Main) {
             loadingDialog(true)
             var user: User?
@@ -96,8 +103,27 @@ class MnemonicViewModel : BaseViewModel() {
     }
 
     fun generateMnemonic() {
-        val dbChainKey = MnemonicClient.generateMnemonic()
+        val dbChainKey = com.gcigb.dbchain.generateMnemonic()
         mnemonic.set(dbChainKey.mnemonic)
         nikeName.set(null)
+    }
+
+    fun checkMnemonic(mnemonic: List<String>): Boolean {
+        if (mnemonic.size != 12) return false
+        val inputStream = BaseApplication.context.assets.open("bip39-wordlist.txt")
+        val br = BufferedReader(InputStreamReader(inputStream, StandardCharsets.UTF_8))
+        val wordList = ArrayList<String>(2048)
+        var word: String?
+        while (br.readLine().also { word = it } != null) {
+            wordList.add(word!!)
+        }
+        br.close()
+        mnemonic.forEach {
+            val contains = wordList.contains(it)
+            if (!contains) {
+                return false
+            }
+        }
+        return true
     }
 }

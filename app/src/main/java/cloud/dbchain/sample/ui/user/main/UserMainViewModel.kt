@@ -6,7 +6,7 @@ import cloud.dbchain.sample.bean.BlogBundle
 import cloud.dbchain.sample.cache.UserInfoCache
 import cloud.dbchain.sample.data.BlogRepository
 import cloud.dbchain.sample.data.table.User
-import com.gcigb.dbchain.DBChain
+import com.gcigb.dbchain.dbChainKey
 import dingshaoshuai.baseext.mvvm.BasePageViewModel
 
 /**
@@ -20,7 +20,7 @@ class UserMainViewModel : BasePageViewModel() {
     val bloglistLiveData = MutableLiveData<List<BlogBundle>>()
 
     fun getBlogList() {
-        val block = suspend { BlogRepository.getBlogs(created_by = DBChain.dbChainKey.address) }
+        val block = suspend { BlogRepository.getBlogs(created_by = dbChainKey.address) }
         launchOnPageSwitch(
             block,
             { it?.isEmpty() ?: false },

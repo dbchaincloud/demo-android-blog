@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import cloud.dbchain.sample.cache.DBChainKeyCache
 import cloud.dbchain.sample.ui.mnemonic.MnemonicActivity
 import cloud.dbchain.sample.ui.mnemonic.login.LoginActivity
-import com.gcigb.dbchain.DBChain
+import com.gcigb.dbchain.withDBChainKey
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
         if (dbChainKey == null) {
             MnemonicActivity.start(this)
         } else {
-            DBChain.withDBChainKey(dbChainKey)
+            withDBChainKey(dbChainKey)
             LoginActivity.start(this)
         }
         finish()

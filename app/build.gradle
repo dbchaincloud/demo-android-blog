@@ -58,6 +58,9 @@ dependencies {
     // json
     implementation 'com.google.code.gson:gson:2.8.6'
     // DBChain
-    implementation 'com.github.dbchaincloud:android-client:1.0.1'
+    implementation 'com.github.dbchaincloud:dbchain-java-client:v1.1.0'
+    implementation('com.github.dbchaincloud:sm2-java-lib:v1.1.0') {
+        exclude group: 'org.bouncycastle', module: 'bcprov-jdk15to18'
+    }
 }
 

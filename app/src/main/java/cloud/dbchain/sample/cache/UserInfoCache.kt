@@ -1,8 +1,6 @@
 package cloud.dbchain.sample.cache
 
 import cloud.dbchain.sample.data.table.User
-import com.gcigb.dbchain.DbChainKey
-import com.gcigb.dbchain.util.json2Any
 import dingshaoshuai.base.feature.json.JsonParseProxy
 
 /**
