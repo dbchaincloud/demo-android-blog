@@ -31,8 +31,9 @@ abstract class BaseTable<T, R : BaseTableBean> {
         if (!checkIdValid(id)) return false
         newData ?: return false
         val messageList = newMessageList()
-        messageList.add(createFreezeMessage(tableName, id))
-        messageList.add(createInsertMessage(tableName, newData.toMap()))
+        val owner = dbChainKey.address
+        messageList.add(createFreezeMessage(tableName, id, owner))
+        messageList.add(createInsertMessage(tableName, newData.toMap(), owner))
         return handleBatchMessage(messageList)
     }
 

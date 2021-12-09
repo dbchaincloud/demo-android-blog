@@ -20,9 +20,9 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
-        val appCode = "5APTSCPSF7"
-        val baseUrl = "https://controlpanel.dbchain.cloud/relay/"
-        val chainId = "testnet"
+        val appCode = "GGPJWXRSC6"
+        val baseUrl = "https://controlpanel.dbchain.cloud/relay02/"
+        val chainId = "testnet02"
         val debug = BuildConfig.DEBUG
         init(
             appCodeParameter = appCode,

@@ -14,7 +14,11 @@ object TokenRepository {
 
     suspend fun checkToken(dbChainKey: DbChainKey): Boolean {
         return withContext(Dispatchers.IO) {
-            checkTokenAvailable(dbChainKey)
+            checkTokenAvailable(
+                privateKeyBytes = dbChainKey.privateKeyBytes,
+                publicKeyBytes33 = dbChainKey.publicKeyBytes33,
+                address = dbChainKey.address
+            )
         }
     }
 
